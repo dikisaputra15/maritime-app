@@ -26,7 +26,8 @@ class TimeofincidentController extends Controller
         // ->whereBetween(DB::raw('DATE(wp_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
         ->where(function($query) {
             $query->Where('wp_terms.term_id', 2490)
-                ->orWhere('wp_terms.term_id', 2491);
+                ->orWhere('wp_terms.term_id', 2491)
+                ->orWhere('wp_terms.term_id', 2650);
             })
         ->get();
 

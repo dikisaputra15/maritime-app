@@ -35,7 +35,9 @@ class TypeofshipController extends Controller
                 ->orWhere('wp_terms.term_id', 2534)
                 ->orWhere('wp_terms.term_id', 2535)
                 ->orWhere('wp_terms.term_id', 2536)
-                ->orWhere('wp_terms.term_id', 2537);
+                ->orWhere('wp_terms.term_id', 2537)
+                ->orWhere('wp_terms.term_id', 2647)
+                ->orWhere('wp_terms.term_id', 2654);
             })
         ->get();
 

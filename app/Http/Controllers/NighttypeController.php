@@ -27,7 +27,8 @@ class NighttypeController extends Controller
         ->where(function($query) {
             $query->Where('wp_terms.term_id', 2492)
                 ->orWhere('wp_terms.term_id', 2493)
-                ->orWhere('wp_terms.term_id', 2494);
+                ->orWhere('wp_terms.term_id', 2494)
+                ->orWhere('wp_terms.term_id', 2651);
             })
         ->get();
 
