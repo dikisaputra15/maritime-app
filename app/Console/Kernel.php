@@ -21,6 +21,8 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\Treatmentofcrew::class,
         \App\Console\Commands\Typeofship::class,
         \App\Console\Commands\Weapon::class,
+        \App\Console\Commands\Assaulted::class,
+        \App\Console\Commands\Timetype::class,
     ];
     /**
      * Define the application's command schedule.
@@ -52,6 +54,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('task:runtypeofship')->everyFifteenMinutes();
 
         $schedule->command('task:runweapon')->everyFifteenMinutes();
+
+        $schedule->command('task:runassaulted')->everyFifteenMinutes();
+
+        $schedule->command('task:runtimetype')->everyFifteenMinutes();
     }
 
     /**

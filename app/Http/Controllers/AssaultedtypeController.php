@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-class TypeofshipController extends Controller
+class AssaultedtypeController extends Controller
 {
     public function index()
     {
@@ -25,20 +25,9 @@ class TypeofshipController extends Controller
         ->whereDate(DB::raw('DATE(wp_posts.post_date)'), $tgl_now)
         // ->whereBetween(DB::raw('DATE(wp_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
         ->where(function($query) {
-            $query->Where('wp_terms.term_id', 2527)
-                ->orWhere('wp_terms.term_id', 2528)
-                ->orWhere('wp_terms.term_id', 2529)
-                ->orWhere('wp_terms.term_id', 2530)
-                ->orWhere('wp_terms.term_id', 2531)
-                ->orWhere('wp_terms.term_id', 2532)
-                ->orWhere('wp_terms.term_id', 2533)
-                ->orWhere('wp_terms.term_id', 2534)
-                ->orWhere('wp_terms.term_id', 2535)
-                ->orWhere('wp_terms.term_id', 2536)
-                ->orWhere('wp_terms.term_id', 2537)
-                ->orWhere('wp_terms.term_id', 2647)
-                ->orWhere('wp_terms.term_id', 2654)
-                ->orWhere('wp_terms.term_id', 2648);
+            $query->Where('wp_terms.term_id', 2524)
+                ->orWhere('wp_terms.term_id', 2525)
+                ->orWhere('wp_terms.term_id', 2523);
             })
         ->get();
 
@@ -47,7 +36,7 @@ class TypeofshipController extends Controller
                 DB::table('maritimestatistiks')
                     ->where('id_listing', $actor->id)
                     ->update([
-                        'type_of_ship' => $actor->name
+                        'actor' => $actor->name
                     ]);
             }
             echo "sukses";

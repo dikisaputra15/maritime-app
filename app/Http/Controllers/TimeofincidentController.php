@@ -27,7 +27,9 @@ class TimeofincidentController extends Controller
         ->where(function($query) {
             $query->Where('wp_terms.term_id', 2490)
                 ->orWhere('wp_terms.term_id', 2491)
-                ->orWhere('wp_terms.term_id', 2650);
+                ->orWhere('wp_terms.term_id', 2650)
+                ->orWhere('wp_terms.term_id', 2663)
+                ->orWhere('wp_terms.term_id', 2664);
             })
         ->get();
 

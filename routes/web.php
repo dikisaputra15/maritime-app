@@ -26,3 +26,5 @@ Route::get('/treatment', [App\Http\Controllers\TreatmentofcrewController::class,
 Route::get('/typeofship', [App\Http\Controllers\TypeofshipController::class, 'index']);
 Route::get('/weapon', [App\Http\Controllers\WeaponController::class, 'index']);
 Route::get('/country', [App\Http\Controllers\CountryController::class, 'index']);
+Route::get('/assaulted', [App\Http\Controllers\AssaultedtypeController::class, 'index']);
+Route::get('/timetype', [App\Http\Controllers\TimeofincidenttypeController::class, 'index']);

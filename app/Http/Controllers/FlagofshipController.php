@@ -85,7 +85,8 @@ class FlagofshipController extends Controller
                 ->orWhere('wp_terms.term_id', 2659)
                 ->orWhere('wp_terms.term_id', 2658)
                 ->orWhere('wp_terms.term_id', 2657)
-                ->orWhere('wp_terms.term_id', 2660);
+                ->orWhere('wp_terms.term_id', 2660)
+                ->orWhere('wp_terms.term_id', 2665);
             })
         ->get();
 
