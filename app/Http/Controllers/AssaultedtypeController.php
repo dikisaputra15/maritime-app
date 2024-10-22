@@ -16,7 +16,7 @@ class AssaultedtypeController extends Controller
         $tgl_now = $tgl->format('Y-m-d');
         // $tgl_coba = ['2024-09-02', '2024-10-01'];
 
-        $actors = DB::table('wp_w2gm_locations_relationships')
+        $assaulteds = DB::table('wp_w2gm_locations_relationships')
         ->join('wp_term_relationships', 'wp_term_relationships.object_id', '=', 'wp_w2gm_locations_relationships.post_id')
         ->join('wp_term_taxonomy', 'wp_term_taxonomy.term_taxonomy_id', '=', 'wp_term_relationships.term_taxonomy_id')
         ->join('wp_terms', 'wp_terms.term_id', '=', 'wp_term_taxonomy.term_id')
@@ -31,12 +31,12 @@ class AssaultedtypeController extends Controller
             })
         ->get();
 
-        if($actors->isNotEmpty()){
-            foreach ($actors as $actor){
+        if($assaulteds->isNotEmpty()){
+            foreach ($assaulteds as $assaulted){
                 DB::table('maritimestatistiks')
-                    ->where('id_listing', $actor->id)
+                    ->where('id_listing', $assaulted->id)
                     ->update([
-                        'actor' => $actor->name
+                        'assaulted_type' => $assaulted->name
                     ]);
             }
             echo "sukses";
