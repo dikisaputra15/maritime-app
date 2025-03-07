@@ -16,26 +16,26 @@ class StolenpropertyController extends Controller
         $tgl_now = $tgl->format('Y-m-d');
         // $tgl_coba = ['2024-09-02', '2024-10-01'];
 
-        $actors = DB::table('wp_w2gm_locations_relationships')
-        ->join('wp_term_relationships', 'wp_term_relationships.object_id', '=', 'wp_w2gm_locations_relationships.post_id')
-        ->join('wp_term_taxonomy', 'wp_term_taxonomy.term_taxonomy_id', '=', 'wp_term_relationships.term_taxonomy_id')
-        ->join('wp_terms', 'wp_terms.term_id', '=', 'wp_term_taxonomy.term_id')
-        ->join('wp_posts', 'wp_posts.ID', '=', 'wp_w2gm_locations_relationships.post_id')
-        ->select('wp_w2gm_locations_relationships.id', 'wp_terms.name')
-        ->whereDate(DB::raw('DATE(wp_posts.post_date)'), $tgl_now)
-        // ->whereBetween(DB::raw('DATE(wp_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
+        $actors = DB::table('fxr_w2gm_locations_relationships')
+        ->join('fxr_term_relationships', 'fxr_term_relationships.object_id', '=', 'fxr_w2gm_locations_relationships.post_id')
+        ->join('fxr_term_taxonomy', 'fxr_term_taxonomy.term_taxonomy_id', '=', 'fxr_term_relationships.term_taxonomy_id')
+        ->join('fxr_terms', 'fxr_terms.term_id', '=', 'fxr_term_taxonomy.term_id')
+        ->join('fxr_posts', 'fxr_posts.ID', '=', 'fxr_w2gm_locations_relationships.post_id')
+        ->select('fxr_w2gm_locations_relationships.id', 'fxr_terms.name')
+        ->whereDate(DB::raw('DATE(fxr_posts.post_date)'), $tgl_now)
+        // ->whereBetween(DB::raw('DATE(fxr_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
         ->where(function($query) {
-            $query->Where('wp_terms.term_id', 2539)
-                ->orWhere('wp_terms.term_id', 2540)
-                ->orWhere('wp_terms.term_id', 2541)
-                ->orWhere('wp_terms.term_id', 2542)
-                ->orWhere('wp_terms.term_id', 2543)
-                ->orWhere('wp_terms.term_id', 2544)
-                ->orWhere('wp_terms.term_id', 2545)
-                ->orWhere('wp_terms.term_id', 2546)
-                ->orWhere('wp_terms.term_id', 2547)
-                ->orWhere('wp_terms.term_id', 2548)
-                ->orWhere('wp_terms.term_id', 2549);
+            $query->Where('fxr_terms.term_id', 2539)
+                ->orWhere('fxr_terms.term_id', 2540)
+                ->orWhere('fxr_terms.term_id', 2541)
+                ->orWhere('fxr_terms.term_id', 2542)
+                ->orWhere('fxr_terms.term_id', 2543)
+                ->orWhere('fxr_terms.term_id', 2544)
+                ->orWhere('fxr_terms.term_id', 2545)
+                ->orWhere('fxr_terms.term_id', 2546)
+                ->orWhere('fxr_terms.term_id', 2547)
+                ->orWhere('fxr_terms.term_id', 2548)
+                ->orWhere('fxr_terms.term_id', 2549);
             })
         ->get();
 

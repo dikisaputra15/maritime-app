@@ -17,18 +17,18 @@ class CountryController extends Controller
         // $tgl_now = '2024-09-19';
         // $tgl_coba = ['2024-09-02', '2024-10-01'];
 
-        $countris = DB::table('wp_w2gm_locations_relationships')
-        ->join('wp_terms', 'wp_terms.term_id', '=', 'wp_w2gm_locations_relationships.location_id')
-        ->join('wp_posts', 'wp_posts.ID', '=', 'wp_w2gm_locations_relationships.post_id')
-        ->select('wp_w2gm_locations_relationships.id', 'wp_terms.name')
-        ->whereDate(DB::raw('DATE(wp_posts.post_date)'), $tgl_now)
-        // ->whereBetween(DB::raw('DATE(wp_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
+        $countris = DB::table('fxr_w2gm_locations_relationships')
+        ->join('fxr_terms', 'fxr_terms.term_id', '=', 'fxr_w2gm_locations_relationships.location_id')
+        ->join('fxr_posts', 'fxr_posts.ID', '=', 'fxr_w2gm_locations_relationships.post_id')
+        ->select('fxr_w2gm_locations_relationships.id', 'fxr_terms.name')
+        ->whereDate(DB::raw('DATE(fxr_posts.post_date)'), $tgl_now)
+        // ->whereBetween(DB::raw('DATE(fxr_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
         ->get();
 
         //  $no = 1;
         //     foreach ($countris as $countri) {
         //         echo $no++ . " " . $countri->name ."<br>";
-        //     } 
+        //     }
 
         if($countris->isNotEmpty()){
             foreach ($countris as $countri){

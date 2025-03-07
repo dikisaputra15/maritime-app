@@ -17,18 +17,18 @@ class StatistikController extends Controller
         $tgl_now = $tgl->format('Y-m-d');
         // $tgl_now = '2024-09-19';
         // $tgl_coba = ['2024-09-02', '2024-10-01'];
-        $icats = DB::table('wp_terms')
-            ->join('wp_term_taxonomy', 'wp_terms.term_id', '=', 'wp_term_taxonomy.term_id')
-            ->join('wp_term_relationships', 'wp_term_taxonomy.term_taxonomy_id', '=', 'wp_term_relationships.term_taxonomy_id')
-            ->join('wp_posts', 'wp_posts.ID', '=', 'wp_term_relationships.object_id')
-            ->join('wp_w2gm_locations_relationships', 'wp_posts.ID', '=', 'wp_w2gm_locations_relationships.post_id')
-            ->select('wp_posts.ID', 'wp_posts.post_title', 'wp_w2gm_locations_relationships.id', 'wp_w2gm_locations_relationships.address_line_1', 'wp_w2gm_locations_relationships.map_coords_1', 'wp_w2gm_locations_relationships.map_coords_2', 'wp_terms.name', 'wp_w2gm_locations_relationships.number_of_incident', 'wp_w2gm_locations_relationships.number_of_injuries', 'wp_w2gm_locations_relationships.number_of_fatalities', 'wp_w2gm_locations_relationships.additional_info', 'wp_posts.post_date', 'wp_terms.name')
-            ->where('wp_posts.post_status', 'publish')
-            ->whereDate(DB::raw('DATE(wp_posts.post_date)'), $tgl_now)
-            // ->whereBetween(DB::raw('DATE(wp_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
+        $icats = DB::table('fxr_terms')
+            ->join('fxr_term_taxonomy', 'fxr_terms.term_id', '=', 'fxr_term_taxonomy.term_id')
+            ->join('fxr_term_relationships', 'fxr_term_taxonomy.term_taxonomy_id', '=', 'fxr_term_relationships.term_taxonomy_id')
+            ->join('fxr_posts', 'fxr_posts.ID', '=', 'fxr_term_relationships.object_id')
+            ->join('fxr_w2gm_locations_relationships', 'fxr_posts.ID', '=', 'fxr_w2gm_locations_relationships.post_id')
+            ->select('fxr_posts.ID', 'fxr_posts.post_title', 'fxr_w2gm_locations_relationships.id', 'fxr_w2gm_locations_relationships.address_line_1', 'fxr_w2gm_locations_relationships.map_coords_1', 'fxr_w2gm_locations_relationships.map_coords_2', 'fxr_terms.name', 'fxr_w2gm_locations_relationships.number_of_incident', 'fxr_w2gm_locations_relationships.number_of_injuries', 'fxr_w2gm_locations_relationships.number_of_fatalities', 'fxr_w2gm_locations_relationships.additional_info', 'fxr_posts.post_date', 'fxr_terms.name')
+            ->where('fxr_posts.post_status', 'publish')
+            ->whereDate(DB::raw('DATE(fxr_posts.post_date)'), $tgl_now)
+            // ->whereBetween(DB::raw('DATE(fxr_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
             ->where(function($query) {
-                $query->where('wp_terms.term_id', 2451)
-                      ->orWhere('wp_terms.term_id', 2456);
+                $query->where('fxr_terms.term_id', 2451)
+                      ->orWhere('fxr_terms.term_id', 2456);
             })
             ->get();
 
