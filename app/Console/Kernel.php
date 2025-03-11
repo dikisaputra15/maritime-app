@@ -58,6 +58,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('task:runassaulted')->everyFifteenMinutes();
 
         $schedule->command('task:runtimetype')->everyFifteenMinutes();
+
+        $schedule->command('task:runcommand')->everyFifteenMinutes();
     }
 
     /**

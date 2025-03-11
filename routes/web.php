@@ -28,3 +28,4 @@ Route::get('/weapon', [App\Http\Controllers\WeaponController::class, 'index']);
 Route::get('/country', [App\Http\Controllers\CountryController::class, 'index']);
 Route::get('/assaulted', [App\Http\Controllers\AssaultedtypeController::class, 'index']);
 Route::get('/timetype', [App\Http\Controllers\TimeofincidenttypeController::class, 'index']);
+Route::get('/region', [App\Http\Controllers\RegionController::class, 'index']);

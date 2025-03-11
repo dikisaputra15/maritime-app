@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('post_title');
             $table->text('address');
             $table->string('country');
+            $table->string('region')->nullable();
             $table->string('location');
             $table->string('main_incident');
             $table->string('incident_category')->nullable();
