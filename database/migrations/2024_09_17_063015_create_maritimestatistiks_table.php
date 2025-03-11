@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('perpetrators')->nullable();
             $table->string('time_of_incident')->nullable();
             $table->string('night_type')->nullable();
+            $table->string('timeofincidenttype')->nullable();
             $table->string('flag_of_ship')->nullable();
             $table->string('type_of_ship')->nullable();
             $table->integer('number_of_incident');
