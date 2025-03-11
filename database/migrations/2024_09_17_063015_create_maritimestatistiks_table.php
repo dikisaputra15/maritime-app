@@ -30,6 +30,10 @@ return new class extends Migration
             $table->string('timeofincidenttype')->nullable();
             $table->string('flag_of_ship')->nullable();
             $table->string('type_of_ship')->nullable();
+            $table->string('stolen_property')->nullable();
+            $table->string('treatment_of_crew')->nullable();
+            $table->string('assaulted_type')->nullable();
+            $table->string('weapons')->nullable();
             $table->integer('number_of_incident');
             $table->integer('number_of_injuries');
             $table->integer('number_of_fatalities');
