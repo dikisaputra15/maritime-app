@@ -40,6 +40,7 @@ class StatistikController extends Controller
         if($icats->isNotEmpty()){
             foreach ($icats as $icat){
                 $loc = $icat->map_coords_1 . "," . " " . $icat->map_coords_2;
+                $weburl = "https://maritime.concordreview.com/incident-tracking/#w2gm-listing-";
 
                 $category = [
                     'id_listing' => $icat->id,
@@ -66,6 +67,7 @@ class StatistikController extends Controller
                     'number_of_injuries' => $icat->number_of_injuries,
                     'number_of_fatalities' => $icat->number_of_fatalities,
                     'additional_info' => $icat->additional_info,
+                    'url' => $weburl . $icat->ID,
                     'date_posting' => $icat->post_date
                 ];
 

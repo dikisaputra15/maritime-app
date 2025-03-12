@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('listing_date')->nullable();
             $table->string('post_title');
             $table->text('address');
-            $table->string('country');
+            $table->string('country')->nullable();
             $table->string('region')->nullable();
             $table->string('location');
             $table->string('main_incident');
@@ -38,6 +38,7 @@ return new class extends Migration
             $table->integer('number_of_injuries');
             $table->integer('number_of_fatalities');
             $table->text('additional_info');
+            $table->string('url');
             $table->date('date_posting');
         });
     }

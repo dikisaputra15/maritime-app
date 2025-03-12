@@ -45,6 +45,8 @@ class TimeofincidenttypeController extends Controller
                     $timeval = '16:01 - 20:00';
                 }elseif($time->meta_value == 6){
                     $timeval = '20:01 - 23:59';
+                }elseif($time->meta_value == 7){
+                    $timeval = 'Unreported/Unconfirmed';
                 }else{
                     $timeval = NULL;
                 }
