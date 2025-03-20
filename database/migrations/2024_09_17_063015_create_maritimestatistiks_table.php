@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('address');
             $table->string('country')->nullable();
             $table->string('region')->nullable();
+            $table->string('coordinate');
             $table->string('main_incident');
             $table->string('incident_category')->nullable();
             $table->string('actor')->nullable();
