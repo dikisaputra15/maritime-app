@@ -49,7 +49,7 @@ class StatistikController extends Controller
                     'post_title' => $icat->post_title,
                     'address' => $icat->address_line_1,
                     'country' => Null,
-                    'location' => $loc,
+                    'coordinat' => $loc,
                     'main_incident' => $icat->name,
                     'incident_category' => NULL,
                     'actor' => NULL,
