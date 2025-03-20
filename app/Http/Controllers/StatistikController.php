@@ -63,6 +63,7 @@ class StatistikController extends Controller
                     'type_of_ship' => NULL,
                     'loss' => NULL,
                     'treatment_of_crew' => NULL,
+                    'injured_personnel' => NULL,
                     'assaulted_type' => NULL,
                     'weapons' => NULL,
                     'number_of_incident' => $icat->number_of_incident,
