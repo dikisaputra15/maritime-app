@@ -20,7 +20,6 @@ return new class extends Migration
             $table->text('address');
             $table->string('country')->nullable();
             $table->string('region')->nullable();
-            $table->string('location');
             $table->string('main_incident');
             $table->string('incident_category')->nullable();
             $table->string('actor')->nullable();
@@ -28,9 +27,10 @@ return new class extends Migration
             $table->string('time_of_incident')->nullable();
             $table->string('night_type')->nullable();
             $table->string('timeofincidenttype')->nullable();
-            $table->string('flag_of_ship')->nullable();
+            $table->string('flag_of_ship_actor')->nullable();
+            $table->string('flag_of_ship_target')->nullable();
             $table->string('type_of_ship')->nullable();
-            $table->string('stolen_property')->nullable();
+            $table->string('loss')->nullable();
             $table->string('treatment_of_crew')->nullable();
             $table->string('assaulted_type')->nullable();
             $table->string('weapons')->nullable();

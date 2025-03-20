@@ -86,7 +86,8 @@ class FlagofshipController extends Controller
                 ->orWhere('fxr_terms.term_id', 2658)
                 ->orWhere('fxr_terms.term_id', 2657)
                 ->orWhere('fxr_terms.term_id', 2660)
-                ->orWhere('fxr_terms.term_id', 2665);
+                ->orWhere('fxr_terms.term_id', 2665)
+                ->orWhere('fxr_terms.term_id', 2836);
             })
         ->get();
 
@@ -95,7 +96,7 @@ class FlagofshipController extends Controller
                 DB::table('maritimestatistiks')
                     ->where('id_listing', $actor->id)
                     ->update([
-                        'flag_of_ship' => $actor->name
+                        'flag_of_ship_target' => $actor->name
                     ]);
             }
             echo "sukses";

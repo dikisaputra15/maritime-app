@@ -44,7 +44,7 @@ class StolenpropertyController extends Controller
                 DB::table('maritimestatistiks')
                     ->where('id_listing', $actor->id)
                     ->update([
-                        'stolen_property' => $actor->name
+                        'loss' => $actor->name
                     ]);
             }
             echo "sukses";
