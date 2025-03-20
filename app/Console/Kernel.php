@@ -59,7 +59,9 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('task:runtimetype')->everyFifteenMinutes();
 
-        $schedule->command('task:runcommand')->everyFifteenMinutes();
+        $schedule->command('task:runregion')->everyFifteenMinutes();
+
+        $schedule->command('task:runflagofshipactor')->everyFifteenMinutes();
     }
 
     /**

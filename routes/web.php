@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\StatistikController::class, 'index']);
 Route::get('/actor', [App\Http\Controllers\ActorController::class, 'index']);
 Route::get('/flag', [App\Http\Controllers\FlagofshipController::class, 'index']);
+Route::get('/flagactor', [App\Http\Controllers\FlagofshipactorController::class, 'index']);
 Route::get('/incidenttype', [App\Http\Controllers\IncidenttypeController::class, 'index']);
 Route::get('/nighttype', [App\Http\Controllers\NighttypeController::class, 'index']);
 Route::get('/perpetrator', [App\Http\Controllers\PerpetratorsController::class, 'index']);

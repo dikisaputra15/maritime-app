@@ -7,21 +7,21 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
 
-class Region extends Command
+class Flagofshipactor extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'task:runregion';
+    protected $signature = 'task:runflagofshipactor';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'region added';
+    protected $description = 'flagofshipactor added';
 
     /**
      * Execute the console command.
@@ -33,10 +33,10 @@ class Region extends Command
 
     public function handle()
     {
-        $response = Http::get('https://maritime.code69.my.id/region');
+        $response = Http::get('https://maritime.code69.my.id/flagactor');
 
         if ($response->successful()) {
-            $this->info('Region accessed successfully.');
+            $this->info('Category accessed successfully.');
         } else {
             $this->error('Failed to access category.');
         }
