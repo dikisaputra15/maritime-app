@@ -28,7 +28,8 @@ class StatistikController extends Controller
             // ->whereBetween(DB::raw('DATE(fxr_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
             ->where(function($query) {
                 $query->where('fxr_terms.term_id', 2451)
-                      ->orWhere('fxr_terms.term_id', 2456);
+                      ->orWhere('fxr_terms.term_id', 2456)
+                      ->orWhere('fxr_terms.term_id', 2853);
             })
             ->get();
 
