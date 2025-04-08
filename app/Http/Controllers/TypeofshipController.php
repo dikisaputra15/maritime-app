@@ -38,7 +38,8 @@ class TypeofshipController extends Controller
                 ->orWhere('fxr_terms.term_id', 2537)
                 ->orWhere('fxr_terms.term_id', 2647)
                 ->orWhere('fxr_terms.term_id', 2654)
-                ->orWhere('fxr_terms.term_id', 2648);
+                ->orWhere('fxr_terms.term_id', 2648)
+                ->orWhere('fxr_terms.term_id', 2889);
             })
         ->get();
 
