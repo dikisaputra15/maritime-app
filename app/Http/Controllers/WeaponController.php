@@ -14,45 +14,67 @@ class WeaponController extends Controller
 
         $tgl = Carbon::now();
         $tgl_now = $tgl->format('Y-m-d');
-        // $tgl_coba = ['2024-09-02', '2024-10-01'];
+        // $tgl_coba = ['2024-02-01', '2024-02-10'];
 
-        $actors = DB::table('fxr_w2gm_locations_relationships')
-        ->join('fxr_term_relationships', 'fxr_term_relationships.object_id', '=', 'fxr_w2gm_locations_relationships.post_id')
-        ->join('fxr_term_taxonomy', 'fxr_term_taxonomy.term_taxonomy_id', '=', 'fxr_term_relationships.term_taxonomy_id')
-        ->join('fxr_terms', 'fxr_terms.term_id', '=', 'fxr_term_taxonomy.term_id')
-        ->join('fxr_posts', 'fxr_posts.ID', '=', 'fxr_w2gm_locations_relationships.post_id')
-        ->select('fxr_w2gm_locations_relationships.id', 'fxr_terms.name')
-        ->whereDate(DB::raw('DATE(fxr_posts.post_date)'), $tgl_now)
-        // ->whereBetween(DB::raw('DATE(fxr_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
-        ->where(function($query) {
-            $query->Where('fxr_terms.term_id', 2496)
-                ->orWhere('fxr_terms.term_id', 2497)
-                ->orWhere('fxr_terms.term_id', 2498)
-                ->orWhere('fxr_terms.term_id', 2499)
-                ->orWhere('fxr_terms.term_id', 2500)
-                ->orWhere('fxr_terms.term_id', 2501)
-                ->orWhere('fxr_terms.term_id', 2502)
-                ->orWhere('fxr_terms.term_id', 2503)
-                ->orWhere('fxr_terms.term_id', 2504)
-                ->orWhere('fxr_terms.term_id', 2505)
-                ->orWhere('fxr_terms.term_id', 2506)
-                ->orWhere('fxr_terms.term_id', 2507)
-                ->orWhere('fxr_terms.term_id', 2508)
-                ->orWhere('fxr_terms.term_id', 2509)
-                ->orWhere('fxr_terms.term_id', 2510)
-                ->orWhere('fxr_terms.term_id', 2511)
-                ->orWhere('fxr_terms.term_id', 2512);
-            })
-        ->get();
+        $regions = DB::table('fxr_postmeta')
+            ->join('fxr_posts', 'fxr_posts.ID', '=', 'fxr_postmeta.post_id')
+            ->join('fxr_w2gm_locations_relationships', 'fxr_w2gm_locations_relationships.post_id', '=', 'fxr_postmeta.post_id')
+            ->select('fxr_postmeta.post_id', 'fxr_postmeta.meta_value', 'fxr_posts.post_date', 'fxr_w2gm_locations_relationships.id')
+            ->whereDate(DB::raw('DATE(fxr_posts.post_date)'), $tgl_now)
+            // ->whereBetween(DB::raw('DATE(fxr_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
+            ->where('fxr_postmeta.meta_key', '_content_field_106')
+            ->get();
 
-        if($actors->isNotEmpty()){
-            foreach ($actors as $actor){
+        //    $no = 1;
+        //     foreach ($tanggals as $tanggal) {
+        //         echo $no++ . " " . $tanggal->id . "<br>";
+        //     }
+
+
+        if($regions->isNotEmpty()){
+            foreach($regions as $region){
+                if($region->meta_value == 1){
+                    $reg = 'No Weapon Used';
+                }elseif($region->meta_value == 2){
+                    $reg = 'Physical Violence';
+                }elseif($region->meta_value == 3){
+                    $reg = 'Blunt Force Weapon';
+                }elseif($region->meta_value == 4){
+                    $reg = 'Improvised Weapon';
+                }elseif($region->meta_value == 5){
+                    $reg = 'Edged Weapon';
+                }elseif($region->meta_value == 6){
+                    $reg = 'Firearm';
+                }elseif($region->meta_value == 7){
+                    $reg = 'Military-grade Firearm';
+                }elseif($region->meta_value == 8){
+                    $reg = 'Explosive';
+                }elseif($region->meta_value == 9){
+                    $reg = 'Homemade Explosive';
+                }elseif($region->meta_value == 10){
+                    $reg = 'Firebomb/Molotov cocktail';
+                }elseif($region->meta_value == 11){
+                    $reg = 'Commercial Explosive';
+                }elseif($region->meta_value == 12){
+                    $reg = 'Military-grade Explosive';
+                }elseif($region->meta_value == 13){
+                    $reg = 'Improvised Explosive Device (IEDs)';
+                }elseif($region->meta_value == 14){
+                    $reg = 'Grenade';
+                }elseif($region->meta_value == 15){
+                    $reg = 'Multiple Weapons Used';
+                }elseif($region->meta_value == 17){
+                    $reg = 'Unreported/Unconfirmed';
+                }else{
+                    $reg = NULL;
+                }
                 DB::table('maritimestatistiks')
-                    ->where('id_listing', $actor->id)
+                    ->where('id_listing', $region->id)
                     ->update([
-                        'weapons' => $actor->name
+                        'weapons' => $reg
                     ]);
             }
+
             echo "sukses";
         }else{
             echo "empty";

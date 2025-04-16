@@ -34,11 +34,15 @@ class InjuredController extends Controller
         if($regions->isNotEmpty()){
             foreach($regions as $region){
                 if($region->meta_value == 1){
-                    $reg = 'Seriously Injured';
+                    $reg = 'Serious Injury';
                 }elseif($region->meta_value == 2){
                     $reg = 'Minor Injury';
                 }elseif($region->meta_value == 3){
                     $reg = 'No Injury';
+                }elseif($region->meta_value == 4){
+                    $reg = 'Unharmed';
+                }elseif($region->meta_value == 5){
+                    $reg = 'Unreported/Unconfirmed';
                 }else{
                     $reg = NULL;
                 }

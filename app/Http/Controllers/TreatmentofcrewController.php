@@ -14,38 +14,69 @@ class TreatmentofcrewController extends Controller
 
         $tgl = Carbon::now();
         $tgl_now = $tgl->format('Y-m-d');
-        // $tgl_coba = ['2024-09-02', '2024-10-01'];
+        // $tgl_coba = ['2024-02-01', '2024-02-10'];
 
-        $actors = DB::table('fxr_w2gm_locations_relationships')
-        ->join('fxr_term_relationships', 'fxr_term_relationships.object_id', '=', 'fxr_w2gm_locations_relationships.post_id')
-        ->join('fxr_term_taxonomy', 'fxr_term_taxonomy.term_taxonomy_id', '=', 'fxr_term_relationships.term_taxonomy_id')
-        ->join('fxr_terms', 'fxr_terms.term_id', '=', 'fxr_term_taxonomy.term_id')
-        ->join('fxr_posts', 'fxr_posts.ID', '=', 'fxr_w2gm_locations_relationships.post_id')
-        ->select('fxr_w2gm_locations_relationships.id', 'fxr_terms.name')
-        ->whereDate(DB::raw('DATE(fxr_posts.post_date)'), $tgl_now)
-        // ->whereBetween(DB::raw('DATE(fxr_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
-        ->where(function($query) {
-            $query->Where('fxr_terms.term_id', 2514)
-                ->orWhere('fxr_terms.term_id', 2515)
-                ->orWhere('fxr_terms.term_id', 2516)
-                ->orWhere('fxr_terms.term_id', 2516)
-                ->orWhere('fxr_terms.term_id', 2518)
-                ->orWhere('fxr_terms.term_id', 2519)
-                ->orWhere('fxr_terms.term_id', 2520)
-                ->orWhere('fxr_terms.term_id', 2521)
-                ->orWhere('fxr_terms.term_id', 2632)
-                ->orWhere('fxr_terms.term_id', 2522);
-            })
-        ->get();
+        $regions = DB::table('fxr_postmeta')
+            ->join('fxr_posts', 'fxr_posts.ID', '=', 'fxr_postmeta.post_id')
+            ->join('fxr_w2gm_locations_relationships', 'fxr_w2gm_locations_relationships.post_id', '=', 'fxr_postmeta.post_id')
+            ->select('fxr_postmeta.post_id', 'fxr_postmeta.meta_value', 'fxr_posts.post_date', 'fxr_w2gm_locations_relationships.id')
+            ->whereDate(DB::raw('DATE(fxr_posts.post_date)'), $tgl_now)
+            // ->whereBetween(DB::raw('DATE(fxr_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
+            ->where('fxr_postmeta.meta_key', '_content_field_107')
+            ->get();
 
-        if($actors->isNotEmpty()){
-            foreach ($actors as $actor){
+        //    $no = 1;
+        //     foreach ($tanggals as $tanggal) {
+        //         echo $no++ . " " . $tanggal->id . "<br>";
+        //     }
+
+
+        if($regions->isNotEmpty()){
+            foreach($regions as $region){
+                if($region->meta_value == 1){
+                    $reg = 'Killed';
+                }elseif($region->meta_value == 2){
+                    $reg = 'Assaulted';
+                }elseif($region->meta_value == 3){
+                    $reg = 'Kidnapped/Taken Hostage';
+                }elseif($region->meta_value == 5){
+                    $reg = 'Threatened';
+                }elseif($region->meta_value == 6){
+                    $reg = 'Evicted from Vessel';
+                }elseif($region->meta_value == 7){
+                    $reg = 'Missing';
+                }elseif($region->meta_value == 9){
+                    $reg = 'Unreported/Unconfirmed';
+                }elseif($region->meta_value == 10){
+                    $reg = 'Unharmed';
+                }elseif($region->meta_value == 11){
+                    $reg = 'No Injury Reported';
+                }elseif($region->meta_value == 12){
+                    $reg = 'Detained';
+                }elseif($region->meta_value == 13){
+                    $reg = 'Seriously Injured';
+                }elseif($region->meta_value == 14){
+                    $reg = 'Minor Injury';
+                }elseif($region->meta_value == 15){
+                    $reg = 'Questioned by Authorities';
+                }elseif($region->meta_value == 17){
+                    $reg = 'No Fatality Reported';
+                }elseif($region->meta_value == 18){
+                    $reg = 'Detained by Authorities';
+                }elseif($region->meta_value == 19){
+                    $reg = 'Injury/Fatality';
+                }elseif($region->meta_value == 20){
+                    $reg = 'No Injury/Fatality';
+                }else{
+                    $reg = NULL;
+                }
                 DB::table('maritimestatistiks')
-                    ->where('id_listing', $actor->id)
+                    ->where('id_listing', $region->id)
                     ->update([
-                        'treatment_of_crew' => $actor->name
+                        'treatment_of_crew' => $reg
                     ]);
             }
+
             echo "sukses";
         }else{
             echo "empty";

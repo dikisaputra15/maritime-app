@@ -7,39 +7,39 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
 
-class Country extends Command
+class VesselLoss extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'task:runcountry';
+    protected $signature = 'task:runvesselloss';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'country added';
+    protected $description = 'Vesselloss added';
 
     /**
      * Execute the console command.
      */
 
-     public function __construct()
-     {
-         parent::__construct();
-     }
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     public function handle()
     {
-        $response = Http::get('https://maritime.code69.my.id/country');
+        $response = Http::get('https://maritime.code69.my.id/vesselloss');
 
         if ($response->successful()) {
-            $this->info('Category accessed successfully.');
+            $this->info('vessel accessed successfully.');
         } else {
-            $this->error('Failed to access category.');
+            $this->error('Failed to access vessel.');
         }
     }
 }

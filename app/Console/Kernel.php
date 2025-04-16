@@ -10,12 +10,10 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         \App\Console\Commands\Actor::class,
         \App\Console\Commands\AutoStatistik::class,
-        \App\Console\Commands\Country::class,
         \App\Console\Commands\Flagofship::class,
         \App\Console\Commands\Incident::class,
         \App\Console\Commands\Nighttype::class,
         \App\Console\Commands\Perpetrators::class,
-        \App\Console\Commands\Stolenproperty::class,
         \App\Console\Commands\Tanggal::class,
         \App\Console\Commands\Timeofincident::class,
         \App\Console\Commands\Treatmentofcrew::class,
@@ -23,6 +21,8 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\Weapon::class,
         \App\Console\Commands\Assaulted::class,
         \App\Console\Commands\Timetype::class,
+        \App\Console\Commands\VesselLoss::class,
+        \App\Console\Commands\PropertyLoss::class,
     ];
     /**
      * Define the application's command schedule.
@@ -33,8 +33,6 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('task:runactor')->everyFifteenMinutes();
 
-        $schedule->command('task:runcountry')->everyFifteenMinutes();
-
         $schedule->command('task:runflagofship')->everyFifteenMinutes();
 
         $schedule->command('task:runincident')->everyFifteenMinutes();
@@ -42,8 +40,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('task:runnighttype')->everyFifteenMinutes();
 
         $schedule->command('task:runperpetrators')->everyFifteenMinutes();
-
-        $schedule->command('task:runstolenproperty')->everyFifteenMinutes();
 
         $schedule->command('task:runtanggal')->everyFifteenMinutes();
 
@@ -64,6 +60,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('task:runflagofshipactor')->everyFifteenMinutes();
 
         $schedule->command('task:runinjured')->everyFifteenMinutes();
+
+        $schedule->command('task:runvesselloss')->everyFifteenMinutes();
+
+        $schedule->command('task:propertyloss')->everyFifteenMinutes();
     }
 
     /**

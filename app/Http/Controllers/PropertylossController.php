@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-class TimeofincidentController extends Controller
+class PropertylossController extends Controller
 {
     public function index()
     {
@@ -22,7 +22,7 @@ class TimeofincidentController extends Controller
             ->select('fxr_postmeta.post_id', 'fxr_postmeta.meta_value', 'fxr_posts.post_date', 'fxr_w2gm_locations_relationships.id')
             ->whereDate(DB::raw('DATE(fxr_posts.post_date)'), $tgl_now)
             // ->whereBetween(DB::raw('DATE(fxr_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
-            ->where('fxr_postmeta.meta_key', '_content_field_105')
+            ->where('fxr_postmeta.meta_key', '_content_field_119')
             ->get();
 
         //    $no = 1;
@@ -34,28 +34,36 @@ class TimeofincidentController extends Controller
         if($regions->isNotEmpty()){
             foreach($regions as $region){
                 if($region->meta_value == 1){
-                    $reg = 'Day';
+                    $reg = 'Discharged Cargo';
                 }elseif($region->meta_value == 2){
-                    $reg = 'Night - Brighter Moon';
+                    $reg = 'Discharged Fuel/Oil';
                 }elseif($region->meta_value == 3){
-                    $reg = 'Night - Half Moon';
+                    $reg = 'Stolen';
                 }elseif($region->meta_value == 4){
-                    $reg = 'Night - Darker Moon';
+                    $reg = 'Engine Spares';
                 }elseif($region->meta_value == 5){
-                    $reg = 'Unreported/Unconfirmedt';
+                    $reg = 'Fuel';
                 }elseif($region->meta_value == 6){
-                    $reg = 'Dawn';
+                    $reg = 'Ships Property/Stores';
                 }elseif($region->meta_value == 7){
-                    $reg = 'Dusk';
+                    $reg = 'Crews Property';
                 }elseif($region->meta_value == 8){
-                    $reg = 'Night';
+                    $reg = 'Cargo';
+                }elseif($region->meta_value == 9){
+                    $reg = 'Tools/Equipment';
+                }elseif($region->meta_value == 10){
+                    $reg = 'Unsecured Items';
+                }elseif($region->meta_value == 11){
+                    $reg = 'No Loss/Impact Reported';
+                }elseif($region->meta_value == 12){
+                    $reg = 'Unreported/Unconfirmed';
                 }else{
                     $reg = NULL;
                 }
                 DB::table('maritimestatistiks')
                     ->where('id_listing', $region->id)
                     ->update([
-                        'time_of_incident' => $reg
+                        'property_loss' => $reg
                     ]);
             }
 

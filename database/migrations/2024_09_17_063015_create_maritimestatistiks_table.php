@@ -18,7 +18,10 @@ return new class extends Migration
             $table->date('listing_date')->nullable();
             $table->string('post_title');
             $table->text('address');
+            $table->string('sea_ocean')->nullable();
             $table->string('country')->nullable();
+            $table->string('area')->nullable();
+            $table->string('location')->nullable();
             $table->string('region')->nullable();
             $table->string('coordinate');
             $table->string('main_incident');
@@ -31,9 +34,11 @@ return new class extends Migration
             $table->string('flag_of_ship_actor')->nullable();
             $table->string('flag_of_ship_target')->nullable();
             $table->string('type_of_ship')->nullable();
-            $table->string('loss')->nullable();
+            $table->string('vessel_loss')->nullable();
+            $table->string('property_loss')->nullable();
             $table->string('treatment_of_crew')->nullable();
-            $table->string('injured_personnel')->nullable();
+            $table->string('injury')->nullable();
+            $table->string('fatality')->nullable();
             $table->string('assaulted_type')->nullable();
             $table->string('weapons')->nullable();
             $table->integer('number_of_incident');

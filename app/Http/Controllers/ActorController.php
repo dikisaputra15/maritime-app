@@ -14,36 +14,57 @@ class ActorController extends Controller
 
         $tgl = Carbon::now();
         $tgl_now = $tgl->format('Y-m-d');
-        // $tgl_coba = ['2024-09-02', '2024-10-01'];
+        // $tgl_coba = ['2024-02-01', '2024-02-10'];
 
-        $actors = DB::table('fxr_w2gm_locations_relationships')
-        ->join('fxr_term_relationships', 'fxr_term_relationships.object_id', '=', 'fxr_w2gm_locations_relationships.post_id')
-        ->join('fxr_term_taxonomy', 'fxr_term_taxonomy.term_taxonomy_id', '=', 'fxr_term_relationships.term_taxonomy_id')
-        ->join('fxr_terms', 'fxr_terms.term_id', '=', 'fxr_term_taxonomy.term_id')
-        ->join('fxr_posts', 'fxr_posts.ID', '=', 'fxr_w2gm_locations_relationships.post_id')
-        ->select('fxr_w2gm_locations_relationships.id', 'fxr_terms.name')
-        ->whereDate(DB::raw('DATE(fxr_posts.post_date)'), $tgl_now)
-        // ->whereBetween(DB::raw('DATE(fxr_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
-        ->where(function($query) {
-            $query->Where('fxr_terms.term_id', 2473)
-                ->orWhere('fxr_terms.term_id', 2622)
-                ->orWhere('fxr_terms.term_id', 2474)
-                ->orWhere('fxr_terms.term_id', 2482)
-                ->orWhere('fxr_terms.term_id', 2475)
-                ->orWhere('fxr_terms.term_id', 2476)
-                ->orWhere('fxr_terms.term_id', 2477)
-                ->orWhere('fxr_terms.term_id', 2478);
-            })
-        ->get();
+        $regions = DB::table('fxr_postmeta')
+            ->join('fxr_posts', 'fxr_posts.ID', '=', 'fxr_postmeta.post_id')
+            ->join('fxr_w2gm_locations_relationships', 'fxr_w2gm_locations_relationships.post_id', '=', 'fxr_postmeta.post_id')
+            ->select('fxr_postmeta.post_id', 'fxr_postmeta.meta_value', 'fxr_posts.post_date', 'fxr_w2gm_locations_relationships.id')
+            ->whereDate(DB::raw('DATE(fxr_posts.post_date)'), $tgl_now)
+            // ->whereBetween(DB::raw('DATE(fxr_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
+            ->where('fxr_postmeta.meta_key', '_content_field_101')
+            ->get();
 
-        if($actors->isNotEmpty()){
-            foreach ($actors as $actor){
+        //    $no = 1;
+        //     foreach ($tanggals as $tanggal) {
+        //         echo $no++ . " " . $tanggal->id . "<br>";
+        //     }
+
+
+        if($regions->isNotEmpty()){
+            foreach($regions as $region){
+                if($region->meta_value == 1){
+                    $reg = 'Civilian-Local/s';
+                }elseif($region->meta_value == 2){
+                    $reg = 'Civilian-Foreigner/s';
+                }elseif($region->meta_value == 3){
+                    $reg = 'Criminal-Local individual/s';
+                }elseif($region->meta_value == 4){
+                    $reg = 'Criminal-Organized Crime Group';
+                }elseif($region->meta_value == 5){
+                    $reg = 'Terrorist';
+                }elseif($region->meta_value == 6){
+                    $reg = 'Activist';
+                }elseif($region->meta_value == 9){
+                    $reg = 'Police';
+                }elseif($region->meta_value == 10){
+                    $reg = 'Military';
+                }elseif($region->meta_value == 11){
+                    $reg = 'Coast Guard';
+                }elseif($region->meta_value == 12){
+                    $reg = 'Government Agency';
+                }elseif($region->meta_value == 8){
+                    $reg = 'Unreported/Unconfirmed';
+                }else{
+                    $reg = NULL;
+                }
                 DB::table('maritimestatistiks')
-                    ->where('id_listing', $actor->id)
+                    ->where('id_listing', $region->id)
                     ->update([
-                        'actor' => $actor->name
+                        'actor' => $reg
                     ]);
             }
+
             echo "sukses";
         }else{
             echo "empty";

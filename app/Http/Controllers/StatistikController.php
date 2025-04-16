@@ -22,7 +22,8 @@ class StatistikController extends Controller
             ->join('fxr_term_relationships', 'fxr_term_taxonomy.term_taxonomy_id', '=', 'fxr_term_relationships.term_taxonomy_id')
             ->join('fxr_posts', 'fxr_posts.ID', '=', 'fxr_term_relationships.object_id')
             ->join('fxr_w2gm_locations_relationships', 'fxr_posts.ID', '=', 'fxr_w2gm_locations_relationships.post_id')
-            ->select('fxr_posts.ID', 'fxr_posts.post_title', 'fxr_w2gm_locations_relationships.id', 'fxr_w2gm_locations_relationships.address_line_1', 'fxr_w2gm_locations_relationships.map_coords_1', 'fxr_w2gm_locations_relationships.map_coords_2', 'fxr_terms.name', 'fxr_w2gm_locations_relationships.number_of_incident', 'fxr_w2gm_locations_relationships.number_of_injuries', 'fxr_w2gm_locations_relationships.number_of_fatalities', 'fxr_w2gm_locations_relationships.additional_info', 'fxr_posts.post_date', 'fxr_terms.name')
+            ->join('fxr_lokasi', 'fxr_w2gm_locations_relationships.location_id', '=', 'fxr_lokasi.location_id')
+            ->select('fxr_posts.ID', 'fxr_posts.post_title', 'fxr_w2gm_locations_relationships.id', 'fxr_w2gm_locations_relationships.address_line_1', 'fxr_lokasi.sea_ocean', 'fxr_lokasi.country', 'fxr_lokasi.area', 'fxr_lokasi.location', 'fxr_w2gm_locations_relationships.map_coords_1', 'fxr_w2gm_locations_relationships.map_coords_2', 'fxr_terms.name', 'fxr_w2gm_locations_relationships.number_of_incident', 'fxr_w2gm_locations_relationships.number_of_injuries', 'fxr_w2gm_locations_relationships.number_of_fatalities', 'fxr_w2gm_locations_relationships.additional_info', 'fxr_posts.post_date', 'fxr_terms.name')
             ->where('fxr_posts.post_status', 'publish')
             ->whereDate(DB::raw('DATE(fxr_posts.post_date)'), $tgl_now)
             // ->whereBetween(DB::raw('DATE(fxr_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
@@ -49,7 +50,10 @@ class StatistikController extends Controller
                     'listing_date' => NULL,
                     'post_title' => $icat->post_title,
                     'address' => $icat->address_line_1,
-                    'country' => Null,
+                    'sea_ocean' => $icat->sea_ocean,
+                    'country' => $icat->country,
+                    'area' => $icat->area,
+                    'location' => $icat->location,
                     'region' => Null,
                     'coordinate' => $loc,
                     'main_incident' => $icat->name,
@@ -62,9 +66,11 @@ class StatistikController extends Controller
                     'flag_of_ship_actor' => NULL,
                     'flag_of_ship_target' => NULL,
                     'type_of_ship' => NULL,
-                    'loss' => NULL,
+                    'vessel_loss' => NULL,
+                    'property_loss' => NULL,
                     'treatment_of_crew' => NULL,
-                    'injured_personnel' => NULL,
+                    'injury' => NULL,
+                    'fatality' => NULL,
                     'assaulted_type' => NULL,
                     'weapons' => NULL,
                     'number_of_incident' => $icat->number_of_incident,

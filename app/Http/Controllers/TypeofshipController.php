@@ -14,43 +14,71 @@ class TypeofshipController extends Controller
 
         $tgl = Carbon::now();
         $tgl_now = $tgl->format('Y-m-d');
-        // $tgl_coba = ['2024-09-02', '2024-10-01'];
+        // $tgl_coba = ['2024-02-01', '2024-02-10'];
 
-        $actors = DB::table('fxr_w2gm_locations_relationships')
-        ->join('fxr_term_relationships', 'fxr_term_relationships.object_id', '=', 'fxr_w2gm_locations_relationships.post_id')
-        ->join('fxr_term_taxonomy', 'fxr_term_taxonomy.term_taxonomy_id', '=', 'fxr_term_relationships.term_taxonomy_id')
-        ->join('fxr_terms', 'fxr_terms.term_id', '=', 'fxr_term_taxonomy.term_id')
-        ->join('fxr_posts', 'fxr_posts.ID', '=', 'fxr_w2gm_locations_relationships.post_id')
-        ->select('fxr_w2gm_locations_relationships.id', 'fxr_terms.name')
-        ->whereDate(DB::raw('DATE(fxr_posts.post_date)'), $tgl_now)
-        // ->whereBetween(DB::raw('DATE(fxr_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
-        ->where(function($query) {
-            $query->Where('fxr_terms.term_id', 2527)
-                ->orWhere('fxr_terms.term_id', 2528)
-                ->orWhere('fxr_terms.term_id', 2529)
-                ->orWhere('fxr_terms.term_id', 2530)
-                ->orWhere('fxr_terms.term_id', 2531)
-                ->orWhere('fxr_terms.term_id', 2532)
-                ->orWhere('fxr_terms.term_id', 2533)
-                ->orWhere('fxr_terms.term_id', 2534)
-                ->orWhere('fxr_terms.term_id', 2535)
-                ->orWhere('fxr_terms.term_id', 2536)
-                ->orWhere('fxr_terms.term_id', 2537)
-                ->orWhere('fxr_terms.term_id', 2647)
-                ->orWhere('fxr_terms.term_id', 2654)
-                ->orWhere('fxr_terms.term_id', 2648)
-                ->orWhere('fxr_terms.term_id', 2889);
-            })
-        ->get();
+        $regions = DB::table('fxr_postmeta')
+            ->join('fxr_posts', 'fxr_posts.ID', '=', 'fxr_postmeta.post_id')
+            ->join('fxr_w2gm_locations_relationships', 'fxr_w2gm_locations_relationships.post_id', '=', 'fxr_postmeta.post_id')
+            ->select('fxr_postmeta.post_id', 'fxr_postmeta.meta_value', 'fxr_posts.post_date', 'fxr_w2gm_locations_relationships.id')
+            ->whereDate(DB::raw('DATE(fxr_posts.post_date)'), $tgl_now)
+            // ->whereBetween(DB::raw('DATE(fxr_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
+            ->where('fxr_postmeta.meta_key', '_content_field_109')
+            ->get();
 
-        if($actors->isNotEmpty()){
-            foreach ($actors as $actor){
+        //    $no = 1;
+        //     foreach ($tanggals as $tanggal) {
+        //         echo $no++ . " " . $tanggal->id . "<br>";
+        //     }
+
+
+        if($regions->isNotEmpty()){
+            foreach($regions as $region){
+                if($region->meta_value == 1){
+                    $reg = 'Tanker';
+                }elseif($region->meta_value == 2){
+                    $reg = 'Bulk Carrier';
+                }elseif($region->meta_value == 3){
+                    $reg = 'Tugboat';
+                }elseif($region->meta_value == 4){
+                    $reg = 'Supply Vessel';
+                }elseif($region->meta_value == 5){
+                    $reg = 'Container Ship';
+                }elseif($region->meta_value == 6){
+                    $reg = 'General Cargo Ship';
+                }elseif($region->meta_value == 7){
+                    $reg = 'Fishing Vessel';
+                }elseif($region->meta_value == 8){
+                    $reg = 'Military/Security Vessel';
+                }elseif($region->meta_value == 9){
+                    $reg = 'Cruise Liner';
+                }elseif($region->meta_value == 10){
+                    $reg = 'Private Vessel';
+                }elseif($region->meta_value == 12){
+                    $reg = 'Unreported/Unconfirmed';
+                }elseif($region->meta_value == 13){
+                    $reg = 'Barge';
+                }elseif($region->meta_value == 14){
+                    $reg = 'Yacht';
+                }elseif($region->meta_value == 15){
+                    $reg = 'Heavy-load carrier';
+                }elseif($region->meta_value == 16){
+                    $reg = 'Police Vessel';
+                }elseif($region->meta_value == 17){
+                    $reg = 'Coast Guard Vessel';
+                }elseif($region->meta_value == 18){
+                    $reg = 'Research Vessel';
+                }elseif($region->meta_value == 19){
+                    $reg = 'Passenger Vessel';
+                }else{
+                    $reg = NULL;
+                }
                 DB::table('maritimestatistiks')
-                    ->where('id_listing', $actor->id)
+                    ->where('id_listing', $region->id)
                     ->update([
-                        'type_of_ship' => $actor->name
+                        'type_of_ship' => $reg
                     ]);
             }
+
             echo "sukses";
         }else{
             echo "empty";
