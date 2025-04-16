@@ -49,7 +49,7 @@ class InjuredController extends Controller
                 DB::table('maritimestatistiks')
                     ->where('id_listing', $region->id)
                     ->update([
-                        'injured_personnel' => $reg
+                        'injury' => $reg
                     ]);
             }
 
