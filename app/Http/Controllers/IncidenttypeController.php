@@ -19,7 +19,7 @@ class IncidenttypeController extends Controller
         $regions = DB::table('fxr_postmeta')
             ->join('fxr_posts', 'fxr_posts.ID', '=', 'fxr_postmeta.post_id')
             ->join('fxr_w2gm_locations_relationships', 'fxr_w2gm_locations_relationships.post_id', '=', 'fxr_postmeta.post_id')
-            ->select('fxr_postmeta.post_id', 'fxr_postmeta.meta_value', 'fxr_posts.post_date', 'fxr_w2gm_locations_relationships.id')
+            ->select('fxr_postmeta.post_id', 'fxr_postmeta.meta_key', 'fxr_postmeta.meta_value', 'fxr_posts.post_date', 'fxr_w2gm_locations_relationships.id')
             ->whereDate(DB::raw('DATE(fxr_posts.post_date)'), $tgl_now)
             // ->whereBetween(DB::raw('DATE(fxr_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
             ->where('fxr_postmeta.meta_key', '_content_field_96')
