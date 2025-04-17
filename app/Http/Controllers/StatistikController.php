@@ -66,6 +66,7 @@ class StatistikController extends Controller
                     'flag_of_ship_actor' => NULL,
                     'flag_of_ship_target' => NULL,
                     'type_of_ship' => NULL,
+                    'type_of_ship_actor' => NULL,
                     'vessel_loss' => NULL,
                     'property_loss' => NULL,
                     'treatment_of_crew' => NULL,
