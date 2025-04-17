@@ -49,6 +49,8 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('task:runtypeofship')->everyFifteenMinutes();
 
+        $schedule->command('task:runtypeofshipactor')->everyFifteenMinutes();
+
         $schedule->command('task:runweapon')->everyFifteenMinutes();
 
         $schedule->command('task:runassaulted')->everyFifteenMinutes();

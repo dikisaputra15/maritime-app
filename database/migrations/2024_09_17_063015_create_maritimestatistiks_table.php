@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('flag_of_ship_actor')->nullable();
             $table->string('flag_of_ship_target')->nullable();
             $table->string('type_of_ship')->nullable();
+            $table->string('type_of_ship_actor')->nullable();
             $table->string('vessel_loss')->nullable();
             $table->string('property_loss')->nullable();
             $table->string('treatment_of_crew')->nullable();
