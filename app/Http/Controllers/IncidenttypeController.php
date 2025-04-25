@@ -16,15 +16,37 @@ class IncidenttypeController extends Controller
         $tgl_now = $tgl->format('Y-m-d');
         // $tgl_coba = ['2024-02-01', '2024-02-10'];
 
-        $regions = DB::table('fxr_postmeta')
-            ->join('fxr_posts', 'fxr_posts.ID', '=', 'fxr_postmeta.post_id')
-            ->join('fxr_w2gm_locations_relationships', 'fxr_w2gm_locations_relationships.post_id', '=', 'fxr_postmeta.post_id')
-            ->select('fxr_postmeta.post_id', 'fxr_postmeta.meta_key', 'fxr_postmeta.meta_value', 'fxr_posts.post_date', 'fxr_w2gm_locations_relationships.id')
+        $actors = DB::table('fxr_w2gm_locations_relationships')
+            ->join('fxr_term_relationships', 'fxr_term_relationships.object_id', '=', 'fxr_w2gm_locations_relationships.post_id')
+            ->join('fxr_term_taxonomy', 'fxr_term_taxonomy.term_taxonomy_id', '=', 'fxr_term_relationships.term_taxonomy_id')
+            ->join('fxr_terms', 'fxr_terms.term_id', '=', 'fxr_term_taxonomy.term_id')
+            ->join('fxr_posts', 'fxr_posts.ID', '=', 'fxr_w2gm_locations_relationships.post_id')
+            ->select('fxr_w2gm_locations_relationships.id', 'fxr_terms.name')
             ->whereDate(DB::raw('DATE(fxr_posts.post_date)'), $tgl_now)
             // ->whereBetween(DB::raw('DATE(fxr_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
-            ->where('fxr_postmeta.meta_key', '_content_field_96')
-            ->orWhere('fxr_postmeta.meta_key', '_content_field_115')
-            ->orWhere('fxr_postmeta.meta_key', '_content_field_97')
+            ->where(function($query) {
+                $query->Where('fxr_terms.term_id', 2837)
+                    ->orWhere('fxr_terms.term_id', 2649)
+                    ->orWhere('fxr_terms.term_id', 2821)
+                    ->orWhere('fxr_terms.term_id', 2468)
+                    ->orWhere('fxr_terms.term_id', 2462)
+                    ->orWhere('fxr_terms.term_id', 2471)
+                    ->orWhere('fxr_terms.term_id', 2880)
+                    ->orWhere('fxr_terms.term_id', 2469)
+                    ->orWhere('fxr_terms.term_id', 2460)
+                    ->orWhere('fxr_terms.term_id', 2459)
+                    ->orWhere('fxr_terms.term_id', 2465)
+                    ->orWhere('fxr_terms.term_id', 2463)
+                    ->orWhere('fxr_terms.term_id', 2892)
+                    ->orWhere('fxr_terms.term_id', 2876)
+                    ->orWhere('fxr_terms.term_id', 2464)
+                    ->orWhere('fxr_terms.term_id', 2457)
+                    ->orWhere('fxr_terms.term_id', 2470)
+                    ->orWhere('fxr_terms.term_id', 2458)
+                    ->orWhere('fxr_terms.term_id', 2452)
+                    ->orWhere('fxr_terms.term_id', 2455)
+                    ->orWhere('fxr_terms.term_id', 2453);
+                })
             ->get();
 
         //    $no = 1;
@@ -33,86 +55,14 @@ class IncidenttypeController extends Controller
         //     }
 
 
-        if($regions->isNotEmpty()){
-            foreach($regions as $region){
-                if($region->meta_key == '_content_field_96'){
-                    if($region->meta_value == 30){
-                        $reg = 'Attack/Military Related';
-                    }elseif($region->meta_value == 28){
-                        $reg = 'Border Dispute/Incursion';
-                    }elseif($region->meta_value == 29){
-                        $reg = 'Detained Vessel/Personnel';
-                    }elseif($region->meta_value == 31){
-                        $reg = 'Incident/Military-Govt Related';
-                    }elseif($region->meta_value == 24){
-                        $reg = 'Suspicious Vessel';
-                    }elseif($region->meta_value == 19){
-                        $reg = 'Terrorism';
-                    }elseif($region->meta_value == 27){
-                        $reg = 'Unreported/Unconfirmed';
-                    }
-                }
-                if($region->meta_key == '_content_field_115'){
-                    if($region->meta_value == 11){
-                        $reg = 'Attack/Crime Related';
-                    }elseif($region->meta_value == 10){
-                        $reg = 'Attempted Boarding';
-                    }elseif($region->meta_value == 2){
-                        $reg = 'Hijacking';
-                    }elseif($region->meta_value == 3){
-                        $reg = 'Hostage';
-                    }elseif($region->meta_value == 4){
-                        $reg = 'Human Trafficking';
-                    }elseif($region->meta_value == 5){
-                        $reg = 'Illegal/Unregulated Fishing';
-                    }elseif($region->meta_value == 12){
-                        $reg = 'Illegal/Undocumented Immigration';
-                    }elseif($region->meta_value == 1){
-                        $reg = 'Narcotics';
-                    }elseif($region->meta_value == 13){
-                        $reg = 'Robbery';
-                    }elseif($region->meta_value == 6){
-                        $reg = 'Smuggling';
-                    }elseif($region->meta_value == 14){
-                        $reg = 'Suspicious Vessel';
-                    }elseif($region->meta_value == 7){
-                        $reg = 'Theft';
-                    }elseif($region->meta_value == 15){
-                        $reg = 'Unauthorized Boarding';
-                    }elseif($region->meta_value == 8){
-                        $reg = 'Violent Robbery';
-                    }elseif($region->meta_value == 9){
-                        $reg = 'Unreported/Unconfirmed';
-                    }
-                }
-                if($region->meta_key == '_content_field_97'){
-                    if($region->meta_value == 4){
-                        $reg = 'Capsize/Listing/Sunk';
-                    }elseif($region->meta_value == 5){
-                        $reg = 'Collision with Ship';
-                    }elseif($region->meta_value == 6){
-                        $reg = 'Collision with Fixed Object';
-                    }elseif($region->meta_value == 7){
-                        $reg = 'Fire/Explosion';
-                    }elseif($region->meta_value == 8){
-                        $reg = 'Occupational Accident';
-                    }elseif($region->meta_value == 9){
-                        $reg = 'Oil Spill';
-                    }elseif($region->meta_value == 10){
-                        $reg = 'Running Aground';
-                    }elseif($region->meta_value == 2){
-                        $reg = 'Weather';
-                    }elseif($region->meta_value == 12){
-                        $reg = 'Other';
-                    }
-                }
+        if($actors->isNotEmpty()){
+            foreach ($actors as $actor){
                 DB::table('maritimestatistiks')
-                    ->where('id_listing', $region->id)
+                    ->where('id_listing', $actor->id)
                     ->update([
-                        'incident_category' => $reg
+                        'incident_category' => $actor->name
                     ]);
             }
-
             echo "sukses";
         }else{
             echo "empty";
