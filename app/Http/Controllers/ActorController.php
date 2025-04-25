@@ -34,13 +34,13 @@ class ActorController extends Controller
         if($regions->isNotEmpty()){
             foreach($regions as $region){
                 if($region->meta_value == 1){
-                    $reg = 'Civilian-Local/s';
+                    $reg = 'Civilian';
                 }elseif($region->meta_value == 2){
                     $reg = 'Civilian-Foreigner/s';
                 }elseif($region->meta_value == 3){
-                    $reg = 'Criminal-Local individual/s';
+                    $reg = 'Criminal';
                 }elseif($region->meta_value == 4){
-                    $reg = 'Criminal-Organized Crime Group';
+                    $reg = 'Organized Crime Group';
                 }elseif($region->meta_value == 5){
                     $reg = 'Terrorist';
                 }elseif($region->meta_value == 6){
