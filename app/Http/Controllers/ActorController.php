@@ -35,8 +35,6 @@ class ActorController extends Controller
             foreach($regions as $region){
                 if($region->meta_value == 1){
                     $reg = 'Civilian';
-                }elseif($region->meta_value == 2){
-                    $reg = 'Civilian-Foreigner/s';
                 }elseif($region->meta_value == 3){
                     $reg = 'Criminal';
                 }elseif($region->meta_value == 4){

@@ -57,6 +57,8 @@ class FlagofshipController extends Controller
                     $reg = 'China';
                 }elseif($region->meta_value == 70){
                     $reg = 'Comoros';
+                }elseif($region->meta_value == 83){
+                    $reg = 'Cook Islands';
                 }elseif($region->meta_value == 11){
                     $reg = 'Cyprus';
                 }elseif($region->meta_value == 74){
@@ -75,6 +77,8 @@ class FlagofshipController extends Controller
                     $reg = 'Ghana';
                 }elseif($region->meta_value == 59){
                     $reg = 'Greece';
+                }elseif($region->meta_value == 86){
+                    $reg = 'Guyana';
                 }elseif($region->meta_value == 67){
                     $reg = 'Hong Kong';
                 }elseif($region->meta_value == 14){
@@ -169,9 +173,9 @@ class FlagofshipController extends Controller
                     $reg = 'Turkmenistan';
                 }elseif($region->meta_value == 49){
                     $reg = 'United Arab Emirates (UAE)';
-                }elseif($region->meta_value == 61){
+                }elseif($region->meta_value == 80){
                     $reg = 'United Kingdom';
-                }elseif($region->meta_value == 73){
+                }elseif($region->meta_value == 81){
                     $reg = 'United States of America';
                 }elseif($region->meta_value == 50){
                     $reg = 'Uzbekistan';

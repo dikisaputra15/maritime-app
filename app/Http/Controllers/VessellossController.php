@@ -66,7 +66,7 @@ class VessellossController extends Controller
                 }elseif($region->meta_value == 17){
                     $reg = 'Detained';
                 }elseif($region->meta_value == 18){
-                    $reg = 'Damage';
+                    $reg = 'Damaged';
                 }elseif($region->meta_value == 19){
                     $reg = 'Minor Damage';
                 }elseif($region->meta_value == 20){
@@ -75,6 +75,8 @@ class VessellossController extends Controller
                     $reg = 'Sunk';
                 }elseif($region->meta_value == 22){
                     $reg = 'Detained by Authorities';
+                }elseif($region->meta_value == 23){
+                    $reg = 'Capsized';
                 }else{
                     $reg = NULL;
                 }

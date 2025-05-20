@@ -53,6 +53,8 @@ class PropertylossController extends Controller
                     $reg = 'Tools/Equipment';
                 }elseif($region->meta_value == 10){
                     $reg = 'Unsecured Items';
+                }elseif($region->meta_value == 13){
+                    $reg = 'Infrastructural Damage';
                 }elseif($region->meta_value == 11){
                     $reg = 'No Loss/Impact Reported';
                 }elseif($region->meta_value == 12){

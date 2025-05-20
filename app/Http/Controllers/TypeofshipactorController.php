@@ -45,8 +45,6 @@ class TypeofshipactorController extends Controller
                     $reg = 'Fishing Vessel';
                 }elseif($region->meta_value == 6){
                     $reg = 'General Cargo Ship';
-                }elseif($region->meta_value == 7){
-                    $reg = 'Heavy-load Carrier';
                 }elseif($region->meta_value == 8){
                     $reg = 'Military/Security Vessel';
                 }elseif($region->meta_value == 9){
