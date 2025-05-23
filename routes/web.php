@@ -33,5 +33,4 @@ Route::get('/injured', [App\Http\Controllers\InjuredController::class, 'index'])
 Route::get('/fatality', [App\Http\Controllers\FatalityController::class, 'index']);
 Route::get('/vesselloss', [App\Http\Controllers\VessellossController::class, 'index']);
 Route::get('/propertyloss', [App\Http\Controllers\PropertylossController::class, 'index']);
-Route::get('/description', [App\Http\Controllers\DescriptionController::class, 'index']);
 Route::get('/articlelink', [App\Http\Controllers\ArticlelinkController::class, 'index']);

@@ -77,7 +77,6 @@ class StatistikController extends Controller
                     'number_of_incident' => $icat->number_of_incident,
                     'number_of_injuries' => $icat->number_of_injuries,
                     'number_of_fatalities' => $icat->number_of_fatalities,
-                    'description' => NULL,
                     'article_link' => NULL,
                     'additional_info' => $icat->additional_info,
                     'url' => $weburl . $icat->ID,
