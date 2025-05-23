@@ -45,6 +45,8 @@ return new class extends Migration
             $table->integer('number_of_incident');
             $table->integer('number_of_injuries');
             $table->integer('number_of_fatalities');
+            $table->text('description')->nullable();
+            $table->text('article_link')->nullable();
             $table->text('additional_info');
             $table->string('url');
             $table->date('date_posting');

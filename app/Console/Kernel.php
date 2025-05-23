@@ -23,6 +23,8 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\Timetype::class,
         \App\Console\Commands\VesselLoss::class,
         \App\Console\Commands\PropertyLoss::class,
+        \App\Console\Commands\Description::class,
+        \App\Console\Commands\Articlelink::class,
     ];
     /**
      * Define the application's command schedule.
@@ -66,6 +68,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('task:runvesselloss')->everyFifteenMinutes();
 
         $schedule->command('task:propertyloss')->everyFifteenMinutes();
+
+        $schedule->command('task:rundescription')->everyFifteenMinutes();
+
+        $schedule->command('task:runarticlelink')->everyFifteenMinutes();
     }
 
     /**
