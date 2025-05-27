@@ -42,7 +42,7 @@ class TimeofincidentController extends Controller
                 }elseif($region->meta_value == 4){
                     $reg = 'Night - Darker Moon';
                 }elseif($region->meta_value == 5){
-                    $reg = 'Unreported/Unconfirmedt';
+                    $reg = 'Unreported/Unconfirmed';
                 }elseif($region->meta_value == 6){
                     $reg = 'Dawn';
                 }elseif($region->meta_value == 7){
