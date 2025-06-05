@@ -153,6 +153,8 @@ class FlagofshipactorController extends Controller
                     $reg = 'Singapore';
                 }elseif($actor->meta_value == 48){
                     $reg = 'South Korea';
+                }elseif($actor->meta_value == 79){
+                    $reg = 'Spain';
                 }elseif($actor->meta_value == 49){
                     $reg = 'Sri Lanka';
                 }elseif($actor->meta_value == 66){
@@ -175,8 +177,12 @@ class FlagofshipactorController extends Controller
                     $reg = 'United Arab Emirates (UAE)';
                 }elseif($actor->meta_value == 57){
                     $reg = 'United Kingdom';
+                }elseif($actor->meta_value == 75){
+                    $reg = 'United States of America';
                 }elseif($actor->meta_value == 58){
                     $reg = 'Uzbekistan';
+                }elseif($actor->meta_value == 80){
+                    $reg = 'Venezuela';
                 }elseif($actor->meta_value == 59){
                     $reg = 'Vietnam';
                 }elseif($actor->meta_value == 60){
