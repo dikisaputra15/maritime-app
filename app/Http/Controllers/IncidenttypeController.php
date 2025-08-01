@@ -55,7 +55,9 @@ class IncidenttypeController extends Controller
                     ->orWhere('fxr_terms.term_id', 3450)
                     ->orWhere('fxr_terms.term_id', 3453)
                     ->orWhere('fxr_terms.term_id', 3454)
-                    ->orWhere('fxr_terms.term_id', 3452);
+                    ->orWhere('fxr_terms.term_id', 3452)
+                    ->orWhere('fxr_terms.term_id', 4041)
+                    ->orWhere('fxr_terms.term_id', 4067);
                 })
             ->get();
 
