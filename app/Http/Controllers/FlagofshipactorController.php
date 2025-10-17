@@ -187,6 +187,8 @@ class FlagofshipactorController extends Controller
                     $reg = 'Vietnam';
                 }elseif($actor->meta_value == 60){
                     $reg = 'Yemen';
+                }elseif($actor->meta_value == 96){
+                    $reg = 'Fiji';
                 }elseif($actor->meta_value == 61){
                     $reg = 'Unreported/Unconfirmed';
                 }else{

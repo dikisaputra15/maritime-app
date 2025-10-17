@@ -185,6 +185,8 @@ class FlagofshipController extends Controller
                     $reg = 'Yemen';
                 }elseif($region->meta_value == 53){
                     $reg = 'Unreported/Unconfirmed';
+                }elseif($region->meta_value == 100){
+                    $reg = 'Denmark';
                 }else{
                     $reg = NULL;
                 }
