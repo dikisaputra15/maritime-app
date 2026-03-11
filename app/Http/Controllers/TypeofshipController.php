@@ -69,6 +69,8 @@ class TypeofshipController extends Controller
                     $reg = 'Research Vessel';
                 }elseif($region->meta_value == 19){
                     $reg = 'Passenger Vessel';
+                }elseif($region->meta_value == 20){
+                    $reg = 'Oil Rig';
                 }else{
                     $reg = NULL;
                 }
